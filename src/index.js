@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
+import Counter from './Counter';
+
 import './styles.scss';
 
-class Counter extends Component {
-  render() {
-    return (
-      <main className="Counter">
-        <p className="count">0</p>
-        <section className="controls">
-          <button>Increment</button>
-          <button>Decrement</button>
-          <button>Reset</button>
-        </section>
-      </main>
-    );
-  }
-}
+const Application = () => {
+  return (
+    <main className="Application">
+      <section className="Counters">
+        <Counter />
+      </section>
+    </main>
+  );
+};
 
-render(<Counter />, document.getElementById('root'));
+render(<Application />, document.getElementById('root'));

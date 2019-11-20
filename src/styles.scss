@@ -1,6 +1,8 @@
 $button-color: magenta;
 
-html, body, * {
+html,
+body,
+* {
   box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
 }
@@ -18,6 +20,10 @@ button {
   &:active {
     background-color: darken($button-color, 10%);
   }
+}
+
+.Counters {
+  display: flex;
 }
 
 .Counter {
