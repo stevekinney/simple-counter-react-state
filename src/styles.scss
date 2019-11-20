@@ -1,0 +1,39 @@
+$button-color: magenta;
+
+html, body, * {
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+button {
+  background-color: $button-color;
+  border: 5px solid lighten($button-color, 30%);
+  color: white;
+  margin: 0 0.5em;
+  padding: 1em;
+  outline: none;
+  &:hover {
+    background-color: darken($button-color, 5%);
+  }
+  &:active {
+    background-color: darken($button-color, 10%);
+  }
+}
+
+.Counter {
+  border: 5px solid lighten($button-color, 40%);
+  font-weight: 700;
+  margin: 2em auto;
+  padding: 2em;
+  width: 400px;
+}
+
+.count {
+  font-size: 8em;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+}
