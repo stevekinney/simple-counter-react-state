@@ -5,7 +5,7 @@
   "keywords": [],
   "main": "src/index.js",
   "repository": {
-    "url": "https://github.com/stevekinney/simple-counter"
+    "url": "https://github.com/stevekinney/simple-counter-react-state"
   },
   "license": "MIT",
   "dependencies": {
