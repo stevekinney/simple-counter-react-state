@@ -137,6 +137,8 @@ increment() {
 
 There are some potentally cool things we could do here. For example, we could add some logic to our component.
 
+**(Live Coding Starts Here)**
+
 ```js
 this.setState((state, props) => {
   if (state.count >= 10) return;
@@ -240,7 +242,7 @@ We can then use a callback to set `localStorage` when the state changes.
 
 ```js
 this.setState(increment, () =>
-  localStorage.setItem('counterState', JSON.stringify(this.state))
+  localStorage.setItem('counterState', JSON.stringify(this.state)),
 );
 ```
 
@@ -304,6 +306,8 @@ increment() {
 
 This is probably your best bet.
 
+**(Jump back into slides for "Patterns and Anti-patterns")**
+
 ## Refactoring to Hooks
 
 Hooks are a new pattern that allow us to write a lot less code. Get ready to delete some code.
@@ -330,6 +334,12 @@ const Counter = ({ max }) => {
   );
 };
 ```
+
+So, what _don't_ we have to do here?
+
+- We don't have to `bind` anything.
+- We dont need a reference to this.
+- We don't need a `constructor` at all.
 
 ### Running Some of Our Previous Experiments
 
@@ -400,7 +410,7 @@ This is useful for a ton of reasons:
 - Storing stuff in `localStorage`.
 - Making AJAX requests.
 
-### Implementing LocalStorage
+### Implementing `localStorage`
 
 Let's get the basic set up in place here.
 
@@ -502,7 +512,7 @@ React.useEffect(() => {
 }, [count]);
 ````
 
-This is actualy persisted between renders.
+This is actually persisted between renders.
 
 This pattern can be useful if you need to know about the previous state of the the component.
 
@@ -514,4 +524,54 @@ if (countRef.current < count) message = 'Higher';
 if (countRef.current > count) message = 'Lower';
 
 countRef.current = count;
+```
+
+### Cleaning Up After `useEffect`
+
+Let's add the ability to add and remove counters.
+
+```js
+const [counters, setCounters] = useState([id(), id()]);
+
+const addCounter = () => setCounters([...counters, id()]);
+const removeCounter = () => setCounters(counters.slice(0, -1));
+```
+
+We'll update the component to look something like this:
+
+```js
+<main className="Application">
+  {counters.map(id => (
+    <Counter id={id} key={id} />
+  ))}
+  <section className="controls">
+    <button onClick={addCounter}>Add Counter</button>
+    <button onClick={removeCounter}>Remove</button>
+  </section>
+</main>
+```
+
+What if we did something like this in the `Counter`?
+
+```js
+useEffect(() => {
+  const interval = setInterval(() => {
+    console.log({ id, count });
+  }, 3000);
+}, [id, count]);
+```
+
+Hmm… that has some weird effects.
+
+Let's do better.
+
+```js
+useEffect(() => {
+  const interval = setInterval(() => {
+    console.log({ id, count });
+  }, 3000);
+  return () => {
+    clearInterval(interval);
+  };
+}, [id, count]);
 ```
