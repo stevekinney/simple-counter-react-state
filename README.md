@@ -489,13 +489,13 @@ The delay is intended to just create some space between the click and what we lo
 
 Let's switch to a Hooks-based component on the `hooks` branch.
 
-````js
+```js
 React.useEffect(() => {
   setTimeout(() => {
     console.log(`Count: ${count}`);
   }, 3000);
 }, [count]);
-```.
+```
 
 That's a much different result, isn't it?
 
@@ -510,7 +510,7 @@ React.useEffect(() => {
     console.log(`You clicked ${countRef.current} times`);
   }, 3000);
 }, [count]);
-````
+```
 
 This is actually persisted between renders.
 
