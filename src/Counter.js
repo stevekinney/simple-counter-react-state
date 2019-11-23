@@ -16,7 +16,7 @@ const useLocalStorage = (initialState, key) => {
   const get = () => {
     const storage = localStorage.getItem(key);
     console.log(localStorage, storage);
-    if (storage) return JSON.parse(storage)[value];
+    if (storage) return JSON.parse(storage).value;
     return initialState;
   };
 
